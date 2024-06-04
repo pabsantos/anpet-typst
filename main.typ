@@ -5,12 +5,16 @@
     (
       name: "Pedro Augusto Borges",
       department: "Pesquisa, Desenvolvimento & Inovação",
-      affiliation: "Observatório Nacional de Segurança Viária"
+      affiliation: "Observatório Nacional de Segurança Viária",
+      email: "pedro.borges@onsv.org.br",
+      address: "Rua, 123, Centro, Curitiba, PR, Brasil"
     ),
     (
       name: "John Doe",
       department: "XYZ Department",
-      affiliation: "ABC University"
+      affiliation: "ABC University",
+      email: "foo@bar",
+      address: "Rua, 456, Centro, Curitiba, PR, Brasil"
     )
   ),
   title: "TEMPLATE EM TYPST PARA O CONGRESSO DA ANPET",

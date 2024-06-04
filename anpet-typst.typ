@@ -2,7 +2,7 @@
   // Título
   title: [Título do trabalho],
 
-  // Vetor com a lista de autores. Para cada autor é possível incluir o nome, instituição e departamento
+  // Vetor com a lista de autores. Para cada autor é possível incluir o nome, instituição, departamento e e-mail para o primeiro autor
   authors: (),
 
   // Resumo do trabalho
@@ -24,7 +24,21 @@
   // Configura a página
   set page(
     paper: "a4",
-    margin: (y: 3cm, left: 3cm, right: 3cm)
+    margin: (top: 3cm, left: 3cm, right: 2cm, bottom: 3cm),
+    header: [
+      #grid(
+        columns: 1fr,
+        align: center,
+        image("logo/logo-38-ANPET.png", width: 27%)
+      )
+    ],
+    footer: [
+      #grid(
+        columns: 1fr,
+        align: left,
+        image("logo/ANPETlogo_novo.png", width: 2.39cm)
+      )
+    ]
   )
 
   // Metadados
@@ -55,8 +69,8 @@
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.caption: it => [
     #text(
-      weight: "bold", [#it.supplement #it.counter.display(it.numbering):]
-    ) #it.body
+      weight: "bold", size: 10pt, [#it.supplement #it.counter.display(it.numbering):]
+    ) #text(size: 10pt, [#it.body])
   ]
 
   // Equações
@@ -77,10 +91,10 @@
     ..authors.map(author => [
       #text(weight: "bold", [#author.name]) \
       #if "affiliation" in author [
-        #author.affiliation \
+        #text(size: 10pt, [#author.affiliation]) \
       ]
       #if "department" in author [
-        #author.department \
+        #text(size: 10pt, [#author.department]) \
       ]
       #v(6pt)
     ]),
@@ -102,10 +116,36 @@
 
   // Agradecimentos
   if agradecimentos != none [
-    #text(size: 10pt, weight: "bold", [AGRADECIMENTOS \ ])
+    #text(size: 10pt, weight: "bold", [Agradecimentos \ ])
     #text(size: 10pt, [#agradecimentos])
   ]
 
   // Bibliografia
   text(10pt, [#bibliography])
+  v(5pt)
+
+  // Informações finais dos autores
+  line(length: 100%, stroke: 0.5pt)
+  v(-10pt)
+  grid(
+    columns: 1fr,
+    align: left,
+    ..authors.map(author => [
+      #text(
+        size: 10pt, [
+          #text(style: "italic", [#author.name]) (#author.email) \
+          #if "affiliation" in author [
+            #author.affiliation,
+          ]
+          #if "department" in author [
+            #author.department \
+          ]
+          #if "address" in author [
+            #author.address
+            #v(6pt)
+          ]
+        ]
+      )
+    ]),
+  )
 }
